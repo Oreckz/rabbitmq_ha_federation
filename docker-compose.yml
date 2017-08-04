@@ -1,10 +1,16 @@
 version: "3"
+networks:
+  rabbitmq:
+    driver: overlay
+
 services:
   rabbit1:
     image: rabbitmq:3.6.1-management
     hostname: rabbit1
     environment:
       RABBITMQ_ERLANG_COOKIE: "test_cluster"
+    networks:
+      - rabbitmq
     ports:
       - "4369"
       - "5672"
@@ -14,6 +20,8 @@ services:
     hostname: rabbit2
     environment:
       RABBITMQ_ERLANG_COOKIE: "test_cluster"
+    networks:
+      - rabbitmq
     ports:
       - "4369"
       - "5672"
@@ -23,6 +31,8 @@ services:
     hostname: rabbit3
     environment:
       RABBITMQ_ERLANG_COOKIE: "test_cluster"
+    networks:
+      - rabbitmq
     ports:
       - "4369"
       - "5672"
@@ -32,6 +42,8 @@ services:
     hostname: rabbit4
     environment:
       RABBITMQ_ERLANG_COOKIE: "test_cluster"
+    networks:
+      - rabbitmq
     ports:
       - "4369"
       - "5672"
